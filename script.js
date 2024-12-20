@@ -1,4 +1,8 @@
-const books = document.querySelector(".books-grid");
+const books = document.querySelector(".books .grid");
+const newBook = document.querySelector(".new-book");
+const submitBook = document.querySelector(".submit-book");
+const dialog = document.querySelector("dialog");
+
 const myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -51,3 +55,7 @@ addBookToLibrary(hobbit);
 addBookToLibrary(luaBook);
 
 renderBooks();
+
+newBook.addEventListener("click", ()=>{
+  document.querySelector("dialog").setAttribute("open", true)
+});

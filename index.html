@@ -15,7 +15,48 @@
       </div>
   
       <div class="books">
-        <div class="books-grid"></div>
+        <div class="grid"></div>
+      </div>
+
+      <div class="dialog-wrapper">
+        <dialog>
+          <h3>Add Book to Library</h3>
+
+          <form method="dialog">
+            <div class="dialog-row">
+              <label for="book-title">Title:</label>
+              <input 
+                type="text"
+                class="book-title"
+                id="book-title"
+                autocomplete="off">
+            </div>
+
+            <div class="dialog-row">
+              <label for="book-author">Author:</label>
+              <input type="text" class="book-author">
+            </div class="dialog-row">
+
+            <div class="dialog-row">
+              <label for="book-pages">Pages:</label>
+              <input
+                type="number"
+                class="book-pages"
+                autocomplete="off"
+                min="1">
+            </div>
+
+            <div class="dialog-row">
+              <label for="book-read">Read:</label>
+              <input 
+                type="checkbox"
+                name="book-read"
+                autocomplete="off">
+            </div>
+
+            <button class="submit-book">OK</button>
+          </form>
+        </dialog>
       </div>
     </div>
 

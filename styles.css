@@ -19,6 +19,19 @@ body {
   height: inherit;
 }
 
+.wrapper button {
+  color: white;
+  padding: .3rem .6rem;
+  outline: none;
+  border: none;
+  border-radius: .1rem;
+  background-color: rgb(63, 116, 214);
+}
+
+.wrapper button:hover {
+  background-color: rgb(57, 90, 221);
+}
+
 .header {
   display: grid;
   grid-template-columns: repeat(2, max-content);
@@ -34,25 +47,12 @@ body {
   font-weight: bolder;
 }
 
-.header .new-book {
-  color: white;
-  padding: .15rem .6rem;
-  outline: none;
-  border: none;
-  border-radius: .1rem;
-  background-color: cornflowerblue;
-}
-
-.header .new-book:hover {
-  background-color: rgb(57, 90, 221);
-}
-
 .books {
   padding: 1rem .5rem;
   background-color: rgba(201, 201, 201, 0.295);
 }
 
-.books-grid {
+.books .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   justify-items: center;
@@ -75,4 +75,72 @@ body {
 
 .books .book p {
   color: white;
+}
+
+.dialog-wrapper:has(dialog[open]) {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+dialog[open] h3 {
+  text-align: center;
+  padding: 1rem;
+}
+
+dialog[open] {
+  display: block;
+  width: 325px;
+  height: 325px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: none;
+  border-radius: .5rem;
+  outline: none;
+  transform: translate(-50%, -50%);
+}
+
+dialog[open] label {
+  display: inline-block;
+  min-width: 60px;
+
+}
+
+dialog[open] input[type="text"],
+dialog[open] input[type="number"] {
+  width: 100%;
+  border: .5px solid gray;
+  border-radius: 2px;
+  padding: .3rem 0 .3rem .25rem;
+  outline: none;
+  appearance: none;
+}
+
+dialog[open] input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+dialog[open] form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 10px;
+}
+
+dialog[open] form button {
+  flex: none;
+  width: 100px;
+  align-self: center;
+}
+
+dialog[open] .dialog-row {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  justify-items: left;
 }
