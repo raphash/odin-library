@@ -25,6 +25,7 @@ body {
   outline: none;
   border: none;
   border-radius: .1rem;
+  font-weight: bold;
   background-color: rgb(63, 116, 214);
 }
 
@@ -64,10 +65,9 @@ body {
   height: 300px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1rem);
+  grid-template-rows: repeat(4, 1rem) 1fr;
   padding: 1rem;
   gap: .25rem;
-  border-radius: .5rem;
   box-shadow: 0 0 10px 0px black;
   font-size: .8rem;
   background-color: rgb(10, 0, 40);
@@ -75,6 +75,11 @@ body {
 
 .books .book p {
   color: white;
+}
+
+.book button {
+  align-self: end;
+  justify-self: end;
 }
 
 .dialog-wrapper:has(dialog[open]) {
@@ -107,7 +112,6 @@ dialog[open] {
 dialog[open] label {
   display: inline-block;
   min-width: 60px;
-
 }
 
 dialog[open] input[type="text"],

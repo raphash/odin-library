@@ -15,7 +15,8 @@
       </div>
   
       <div class="books">
-        <div class="grid"></div>
+        <div class="grid">
+        </div>
       </div>
 
       <div class="dialog-wrapper">
@@ -29,12 +30,18 @@
                 type="text"
                 class="book-title"
                 id="book-title"
-                autocomplete="off">
+                autocomplete="off"
+                placeholder="The Adventure of John">
             </div>
 
             <div class="dialog-row">
               <label for="book-author">Author:</label>
-              <input type="text" class="book-author">
+              <input 
+                type="text" 
+                class="book-author"
+                id="book-author"
+                autocomplete="off"
+                placeholder="John Doe">
             </div class="dialog-row">
 
             <div class="dialog-row">
@@ -42,6 +49,7 @@
               <input
                 type="number"
                 class="book-pages"
+                id="book-pages"
                 autocomplete="off"
                 min="1">
             </div>
@@ -50,11 +58,13 @@
               <label for="book-read">Read:</label>
               <input 
                 type="checkbox"
+                class="book-read"
                 name="book-read"
+                id="book-read"
                 autocomplete="off">
             </div>
 
-            <button class="submit-book">OK</button>
+            <button class="book-submit">OK</button>
           </form>
         </dialog>
       </div>
