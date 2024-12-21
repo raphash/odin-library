@@ -1,8 +1,8 @@
-const books = document.querySelector(".books .grid");
+const dialog = document.querySelector("dialog");
+const bookGrid = document.querySelector(".grid");
 const newBook = document.querySelector(".new-book");
 const submitBook = document.querySelector(".book-submit");
 
-const dialog = document.querySelector("dialog");
 const dialogInfo = {
   title: document.querySelector(".book-title"),
   author: document.querySelector(".book-author"),
@@ -48,33 +48,30 @@ function createBookCard(book) {
   bookInfo.read.innerHTML = `<strong>Read:</strong> ${book.read ? "read" : "not read yet"}`;
   bookInfo.delete.textContent = `Delete`;
 
-  card.setAttribute("data-index-number", myLibrary.length - 1);
-  
   // Insert all book properties into card.
   for (const info in bookInfo) {
     card.appendChild(bookInfo[info]);
   }
 
-  books.appendChild(card);
+  bookGrid.appendChild(card);
 
+  // Logic to remove a book from library and html.
   bookInfo.delete.addEventListener("click", ()=>{
-    const index = card.getAttribute("data-index-number");
-    const bookNode = document.querySelectorAll(".book")
-
-    // Loop through books from html.
-    bookLoop: for (const bookCard of bookNode) {
-      for (const book of myLibrary) {
-        const bookTitle = bookCard.querySelector(".title").textContent.replace("Title: ", "").trim();
-        const bookAuthor = bookCard.querySelector(".author").textContent.replace("Author: ", "").trim();
-
-        if (book.title == bookTitle && book.author == bookAuthor) {
-          const bookIndex = myLibrary.indexOf(book);
-          myLibrary.splice(bookIndex, 1); // Remove book from myLibrary
-          books.removeChild(document.querySelectorAll(".book")[bookIndex]); // Remove book from html.
-          card.setAttribute("data-index-number", bookIndex); // Update the "data-index-number" index.
-          
-          break bookLoop;
+    const bookNode = document.querySelectorAll(".book");
+    
+    for (const bookCard of bookNode) {
+      const bookTitle = bookCard.querySelector(".title").textContent.replace("Title: ", "");
+      
+      if (book.title == bookTitle) {
+        for (const libraryBook of myLibrary) {
+          if (book.title == libraryBook.title) {
+            myLibrary.splice(myLibrary.indexOf(libraryBook), 1);
+          }
         }
+
+        bookGrid.removeChild(bookCard);
+
+        break;
       }
     }
   });
@@ -86,7 +83,7 @@ newBook.addEventListener("click", ()=>{
 });
 
 // Insert a new book in book grid.
-submitBook.addEventListener("click",  (e)=>{
+submitBook.addEventListener("click", (e)=>{
   const book = new Book(
     dialogInfo.title.value,
     dialogInfo.author.value,
