@@ -20,6 +20,12 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(book) {
+  for (const libBook of myLibrary) {
+    if (libBook.title == book.title && libBook.author == book.author) {
+      return;
+    }
+  }
+
   myLibrary.push(book);
 }
 
@@ -32,28 +38,58 @@ function createBookCard(book) {
     title: document.createElement("p"),
     author: document.createElement("p"),
     pages: document.createElement("p"),
-    read: document.createElement("p"),
+    buttons: document.createElement("div"),
+    read: document.createElement("button"),
     delete: document.createElement("button")
   }
 
   bookInfo.title.classList.add("title");
   bookInfo.author.classList.add("author");
   bookInfo.pages.classList.add("pages");
+  bookInfo.buttons.classList.add("buttons");
   bookInfo.read.classList.add("read");
   bookInfo.delete.classList.add("delete");
 
-  bookInfo.title.innerHTML = `<strong>Title:</strong> ${book.title}`;
+  bookInfo.title.innerHTML = `${book.title}`;
   bookInfo.author.innerHTML = `<strong>Author:</strong> ${book.author}`;
   bookInfo.pages.innerHTML = `<strong>Pages:</strong> ${book.pages}`;
-  bookInfo.read.innerHTML = `<strong>Read:</strong> ${book.read ? "read" : "not read yet"}`;
   bookInfo.delete.textContent = `Delete`;
+
+  bookInfo.buttons.appendChild(bookInfo.read);
+  bookInfo.buttons.appendChild(bookInfo.delete);
+
+  if (book.read) {
+    bookInfo.read.classList.remove("not-read");
+    bookInfo.read.textContent = `Read`;
+  } else {
+    bookInfo.read.classList.add("not-read");
+    bookInfo.read.textContent = `Not Read`;
+  }
 
   // Insert all book properties into card.
   for (const info in bookInfo) {
+    if (info == "read" || info == "delete") {
+      continue;
+    }
+
     card.appendChild(bookInfo[info]);
   }
 
   bookGrid.appendChild(card);
+
+  bookInfo.read.addEventListener("click", ()=>{
+    bookInfo.read.classList.toggle("not-read");
+
+    if (bookInfo.read.textContent == "Not Read") {
+      bookInfo.read.textContent = "Read";
+      bookInfo.read.classList.remove("not-read");
+      myLibrary[myLibrary.indexOf(book)].read = true
+    } else {
+      bookInfo.read.textContent = "Not Read";
+      bookInfo.read.classList.add("not-read");
+      myLibrary[myLibrary.indexOf(book)].read = false
+    }
+  });
 
   // Logic to remove a book from library and html.
   bookInfo.delete.addEventListener("click", ()=>{
@@ -71,31 +107,53 @@ function createBookCard(book) {
         }
 
         bookGrid.removeChild(bookCard);
-
         break;
       }
     }
   });
 }
 
+// Example Books
+const hobbit = new Book("The Hobbit by J.R.R", "Tolkien", 295, false);
+const minecraft = new Book("Minecraft for Devs", "Mojang", 512, true);
+const superman = new Book("Superman", "DC", 624, false);
+
+addBookToLibrary(hobbit);
+addBookToLibrary(minecraft);
+addBookToLibrary(superman);
+
+createBookCard(hobbit);
+createBookCard(minecraft);
+createBookCard(superman);
+
 // Show the dialog to add a book.
 newBook.addEventListener("click", ()=>{
-  document.querySelector("dialog").setAttribute("open", true)
+  document.querySelector("dialog").setAttribute("open", true);
 });
 
 // Insert a new book in book grid.
 submitBook.addEventListener("click", (e)=>{
   const book = new Book(
-    dialogInfo.title.value,
-    dialogInfo.author.value,
-    dialogInfo.pages.value,
-    dialogInfo.read.checked
+     dialogInfo.title.value,
+     dialogInfo.author.value,
+    +dialogInfo.pages.value,
+     dialogInfo.read.checked
   );
 
   dialogInfo.title.value = "";
   dialogInfo.author.value = "";
   dialogInfo.pages.value = "";
   dialogInfo.read.checked = false;
+
+  // Logic to check if book already exists in bookCard.
+  for (const gridBook of document.querySelectorAll(".book")) {
+    const gridBookTitle = gridBook.querySelector(".title").textContent.replace("Title: ", "");
+    const gridBookAuthor = gridBook.querySelector(".author").textContent.replace("Author: ", "");
+
+    if (gridBookTitle == book.title && gridBookAuthor == book.author) {
+      return;
+    }
+  }
 
   addBookToLibrary(book);
   createBookCard(book);

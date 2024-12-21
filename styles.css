@@ -20,6 +20,7 @@ body {
 }
 
 .wrapper button {
+  width: 90px;
   color: white;
   padding: .3rem .6rem;
   outline: none;
@@ -61,20 +62,47 @@ body {
 }
 
 .books .book {
-  width: 225px;
+  width: 250px;
   height: 300px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1rem) 1fr;
+  grid-template-rows: repeat(3, max-content) 1fr;
   padding: 1rem;
-  gap: .25rem;
+  gap: .5rem;
+  overflow: hidden;
   box-shadow: 0 0 10px 0px black;
-  font-size: .8rem;
+  overflow-y: scroll;
   background-color: rgb(10, 0, 40);
+}
+
+.books ::-webkit-scrollbar {
+  width: 0px;
+  background-color: transparent;
 }
 
 .books .book p {
   color: white;
+  word-break: break-all;
+}
+
+.book .title {
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem;
+}
+
+.book .buttons {
+  display: grid;
+  gap: 10px;
+  align-self: end;
+}
+
+.book .buttons .read {
+  background-color: rgb(51, 221, 65);
+}
+
+.book .buttons .not-read {
+  background-color: rgb(214, 63, 63);
 }
 
 .book button {
@@ -83,12 +111,14 @@ body {
 }
 
 .dialog-wrapper:has(dialog[open]) {
+  top: 0%;
+  left: 0%;
   position: absolute;
   width: 100vw;
   height: 100vh;
   z-index: 1;
   opacity: 1;
-  background-color: rgba(0, 0, 0, 0.65);
+  background-color: rgba(0, 0, 0, 0.815);
 }
 
 dialog[open] h3 {
