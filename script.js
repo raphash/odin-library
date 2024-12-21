@@ -61,10 +61,11 @@ function createBookCard(book) {
     
     for (const bookCard of bookNode) {
       const bookTitle = bookCard.querySelector(".title").textContent.replace("Title: ", "");
+      const bookAuthor = bookCard.querySelector(".author").textContent.replace("Author: ", "");
       
-      if (book.title == bookTitle) {
+      if (book.title == bookTitle && book.author == bookAuthor) {
         for (const libraryBook of myLibrary) {
-          if (book.title == libraryBook.title) {
+          if (book.title == libraryBook.title && book.author == libraryBook.author) {
             myLibrary.splice(myLibrary.indexOf(libraryBook), 1);
           }
         }
