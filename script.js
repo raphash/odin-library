@@ -58,6 +58,7 @@ function createBookCard(book) {
   bookInfo.buttons.appendChild(bookInfo.read);
   bookInfo.buttons.appendChild(bookInfo.delete);
 
+  // Read button initial value.
   if (book.read) {
     bookInfo.read.classList.remove("not-read");
     bookInfo.read.textContent = `Read`;
@@ -77,17 +78,18 @@ function createBookCard(book) {
 
   bookGrid.appendChild(card);
 
+  // Button read logic.
   bookInfo.read.addEventListener("click", ()=>{
     bookInfo.read.classList.toggle("not-read");
 
     if (bookInfo.read.textContent == "Not Read") {
       bookInfo.read.textContent = "Read";
       bookInfo.read.classList.remove("not-read");
-      myLibrary[myLibrary.indexOf(book)].read = true
+      myLibrary[myLibrary.indexOf(book)].read = true;
     } else {
       bookInfo.read.textContent = "Not Read";
       bookInfo.read.classList.add("not-read");
-      myLibrary[myLibrary.indexOf(book)].read = false
+      myLibrary[myLibrary.indexOf(book)].read = false;
     }
   });
 
@@ -113,8 +115,8 @@ function createBookCard(book) {
   });
 }
 
-// Example Books
-const hobbit = new Book("The Hobbit by J.R.R", "Tolkien", 295, false);
+// Example Books.
+const hobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
 const minecraft = new Book("Minecraft for Devs", "Mojang", 512, true);
 const superman = new Book("Superman", "DC", 624, false);
 
@@ -134,12 +136,21 @@ newBook.addEventListener("click", ()=>{
 // Insert a new book in book grid.
 submitBook.addEventListener("click", (e)=>{
   const book = new Book(
-     dialogInfo.title.value,
-     dialogInfo.author.value,
+     dialogInfo.title.value.trim(),
+     dialogInfo.author.value.trim(),
     +dialogInfo.pages.value,
      dialogInfo.read.checked
   );
 
+  if (!book.title || 
+      !book.author||
+      !book.pages) {
+      return;
+  }
+
+  dialog.close();
+
+  // Clear the inputs.
   dialogInfo.title.value = "";
   dialogInfo.author.value = "";
   dialogInfo.pages.value = "";

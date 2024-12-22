@@ -30,8 +30,10 @@
                 class="book-title"
                 id="book-title"
                 autocomplete="off"
-                placeholder="The Adventure of John">
-            </div>
+                placeholder="The Adventure of John"
+                pattern="(.|\s)*\S(.|\s)*"
+                required>
+              </div>
 
             <div class="dialog-row">
               <label for="book-author">Author:</label>
@@ -40,7 +42,9 @@
                 class="book-author"
                 id="book-author"
                 autocomplete="off"
-                placeholder="John Doe">
+                placeholder="John Doe"
+                pattern="(.|\s)*\S(.|\s)*"
+                required>
             </div class="dialog-row">
 
             <div class="dialog-row">
@@ -50,7 +54,9 @@
                 class="book-pages"
                 id="book-pages"
                 autocomplete="off"
-                min="1">
+                placeholder="255"
+                min="1"
+                required>
             </div>
 
             <div class="dialog-row">
