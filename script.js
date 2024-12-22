@@ -131,6 +131,11 @@ createBookCard(superman);
 // Show the dialog to add a book.
 newBook.addEventListener("click", ()=>{
   document.querySelector("dialog").setAttribute("open", true);
+  
+  // Fix bug: https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable
+  for (const input of Array.from(document.querySelectorAll("input"))) {
+    input.setAttribute("required", true);
+  }
 });
 
 // Insert a new book in book grid.
@@ -147,6 +152,11 @@ submitBook.addEventListener("click", (e)=>{
       !book.author||
       !book.pages) {
       return;
+  }
+
+  // Fix bug: https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable
+  for (const input of Array.from(document.querySelectorAll("input"))) {
+    input.removeAttribute("required");
   }
 
   // Clear the inputs.
