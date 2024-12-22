@@ -85,7 +85,7 @@ body {
 
 .books .book p {
   color: white;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 .book .title {
