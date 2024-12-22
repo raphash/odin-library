@@ -1,3 +1,7 @@
+@font-face { font-family: "Poppins-Regular"; src: url("fonts/Poppins-Regular.ttf"); }
+@font-face { font-family: "Poppins-Medium"; src: url("fonts/Poppins-Medium.ttf"); }
+@font-face { font-family: "Poppins-Bold"; src: url("fonts/Poppins-Bold.ttf"); }
+
 *,
 *::before,
 *::after {
@@ -8,8 +12,9 @@
 
 body {
   height: 100vh;
-  font-family: sans-serif;
+  font-family: "Poppins-Regular";
   text-rendering: optimizeLegibility;
+  background-color: #e9ecf1;
 }
 
 .wrapper {
@@ -23,15 +28,14 @@ body {
   width: 90px;
   color: white;
   padding: .3rem .6rem;
-  outline: none;
   border: none;
   border-radius: .1rem;
-  font-weight: bold;
-  background-color: rgb(63, 116, 214);
+  font-family: "Poppins-Medium";
+  background-color: #0284c7;
 }
 
 .wrapper button:hover {
-  background-color: rgb(57, 90, 221);
+  background-color: #0284c7;
 }
 
 .header {
@@ -40,18 +44,17 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: .5rem;
-  background-color: rgb(10, 0, 40);
+  background-color: #0f172a;
 }
 
 .header .icon {
   color: white;
   font-size: 1.25rem;
-  font-weight: bolder;
+  font-family: "Poppins-Medium";
 }
 
 .books {
   padding: 1rem .5rem;
-  background-color: rgba(201, 201, 201, 0.295);
 }
 
 .books .grid {
@@ -70,9 +73,9 @@ body {
   padding: 1rem;
   gap: .5rem;
   overflow: hidden;
-  box-shadow: 0 0 10px 0px black;
+  box-shadow: 0 0 10px 0px #0000004f;
   overflow-y: scroll;
-  background-color: rgb(10, 0, 40);
+  background-color: #0f172a;
 }
 
 .books ::-webkit-scrollbar {
@@ -86,9 +89,9 @@ body {
 }
 
 .book .title {
-  font-weight: bold;
   text-align: center;
   padding: 1rem;
+  font-family: "Poppins-Bold";
 }
 
 .book .buttons {
@@ -98,11 +101,15 @@ body {
 }
 
 .book .buttons .read {
-  background-color: rgb(51, 221, 65);
+  background-color: #16a34a;
 }
 
 .book .buttons .not-read {
-  background-color: rgb(214, 63, 63);
+  background-color: #dc2626;
+}
+
+.book .buttons .delete {
+  background-color: #dc2626;
 }
 
 .book button {
@@ -117,41 +124,71 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: 1;
-  opacity: 1;
-  background-color: rgba(0, 0, 0, 0.815);
-}
-
-dialog[open] h3 {
-  text-align: center;
-  padding: 1rem;
+  background-color: #000000d0;
 }
 
 dialog[open] {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, max-content) 1fr;
   width: 325px;
   height: 325px;
-  position: absolute;
   top: 50%;
   left: 50%;
+  position: absolute;
   border: none;
   border-radius: .5rem;
   outline: none;
   transform: translate(-50%, -50%);
 }
 
+dialog[open] h3 {
+  text-align: center;
+  padding: 1rem;
+  font-family: "Poppins-Medium";
+}
+
 dialog[open] label {
   display: inline-block;
-  min-width: 60px;
+  min-width: 70px;
+  font-family: "Poppins-Medium";
 }
 
 dialog[open] input[type="text"],
 dialog[open] input[type="number"] {
   width: 100%;
-  border: .5px solid gray;
+  border: .5px solid #73767a;
   border-radius: 2px;
   padding: .3rem 0 .3rem .25rem;
-  outline: none;
+  font-family: inherit;
+}
+
+dialog[open] input[type="checkbox"] {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border: .5px solid #73767a;
+  border-radius: 2px;
+  position: relative;
+  background-color: transparent;
   appearance: none;
+}
+
+dialog[open] input[type="checkbox"]:checked::before {
+  content: "";
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: .80rem;
+  height: .80rem;
+  background-color: #0284c7;
+}
+
+dialog[open] input:focus,
+dialog[open] button:focus-within {
+  border: none;
+  outline: 1px solid #0284c7;
 }
 
 dialog[open] input[type="checkbox"] {
@@ -160,8 +197,7 @@ dialog[open] input[type="checkbox"] {
 }
 
 dialog[open] form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   padding: 1rem;
   gap: 10px;
 }
@@ -177,4 +213,9 @@ dialog[open] .dialog-row {
   grid-template-columns: max-content 1fr;
   align-items: center;
   justify-items: left;
+  vertical-align: middle;
+}
+
+dialog[open] .dialog-row:last-child {
+  justify-self: center;
 }

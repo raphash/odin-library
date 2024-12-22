@@ -142,13 +142,12 @@ submitBook.addEventListener("click", (e)=>{
      dialogInfo.read.checked
   );
 
+  // Check if input are filled.
   if (!book.title || 
       !book.author||
       !book.pages) {
       return;
   }
-
-  dialog.close();
 
   // Clear the inputs.
   dialogInfo.title.value = "";
@@ -168,4 +167,5 @@ submitBook.addEventListener("click", (e)=>{
 
   addBookToLibrary(book);
   createBookCard(book);
+  dialog.close();
 });
