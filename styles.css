@@ -143,9 +143,14 @@ dialog[open] {
 }
 
 dialog[open] h3 {
-  text-align: center;
   padding: 1rem;
+  text-align: center;
+  vertical-align: middle;
   font-family: "Poppins-Medium";
+}
+
+dialog[open] h3 {
+  justify-self: center;
 }
 
 dialog[open] label {
@@ -217,5 +222,6 @@ dialog[open] .dialog-row {
 }
 
 dialog[open] .dialog-row:last-child {
+  margin: 1rem;
   justify-self: center;
 }

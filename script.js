@@ -130,7 +130,7 @@ createBookCard(superman);
 
 // Show the dialog to add a book.
 newBook.addEventListener("click", ()=>{
-  document.querySelector("dialog").setAttribute("open", true);
+  document.querySelector("dialog").showModal();
   
   // Fix bug: https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable
   for (const input of Array.from(document.querySelectorAll("input"))) {
@@ -178,4 +178,11 @@ submitBook.addEventListener("click", (e)=>{
   addBookToLibrary(book);
   createBookCard(book);
   dialog.close();
+});
+
+// Logic to close dialog.
+window.addEventListener("keydown", (e)=>{
+  if (e.key == "Escape" && dialog.open) {
+    dialog.close();
+  }
 });
